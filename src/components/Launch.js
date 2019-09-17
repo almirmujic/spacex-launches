@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import '../App.css'
 
 //styling
 import styled from 'styled-components'
@@ -6,6 +7,18 @@ import styled from 'styled-components'
 const Patch = styled.img`
     width: 200px;
     margin: 1em; 
+`
+
+const ImgBullet = styled.li`
+    width: 10px;
+    height: 10px;
+    margin: 5px;
+    border-radius: 50%;
+    background-color: #333;
+    opacity: .4;
+    &:hover{
+        opacity: 1;
+    }
 `
 
 function Launch({ match }) {
@@ -17,7 +30,7 @@ function Launch({ match }) {
         return {
             details: data.details,
             name: data.rocket.rocket_name,
-            location: data.launch_site.site_name_long,
+            location: data.launch_site.site_name,
             video: data.links.video_link,
             youtube: data.links.youtube_id,
             imgs: data.links.flickr_images,
@@ -41,10 +54,9 @@ function Launch({ match }) {
         fetchLaunch();
     }, [match.params.id])
 
-    const nextImg = () => {
-        setCurrImg(currImg + 1)
+    const setImg = (e) => {
+        setCurrImg(e.target.value);
     }
-
 
 
     return (
@@ -55,7 +67,7 @@ function Launch({ match }) {
                 <h3 style={{ margin: '.2em', opacity: '.4' }}>{info.name}</h3>
                 <span style={{ opacity: '.4' }}>{info.year}</span>
                 <h2 style={{ margin: '1em' }}>{info.location}</h2>
-                <p style={{ lineHeight: '1.5em', letterSpacing: '.7px' }}>{info.details}</p>
+                <p style={{ lineHeight: '1.5em', letterSpacing: '.6px' }}>{info.details}</p>
                 <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2em', width: '100%' }}>
                     {
                         info.youtube === null ? '' :
@@ -86,9 +98,19 @@ function Launch({ match }) {
                         info.imgs === undefined || info.imgs.length <= 0 ? '' :
                             <div style={{ width: '100%' }}>
                                 <img src={info.imgs[currImg]} alt={info.name} style={{ width: '100%' }} />
-                                <button onClick={nextImg} >Next img</button>
+                                <ul style={{ display: 'flex', justifyContent: 'center', margin: '1em', listStyleType: 'none' }}>
+                                    {
+                                        info.imgs.map((img, id) => <ImgBullet onClick={setImg} value={id} ></ImgBullet>)
+                                    }
+                                </ul>
                             </div>
                     }
+                    <div>
+                        <h3>Extra links</h3>
+                        <div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div >

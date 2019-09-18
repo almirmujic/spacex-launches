@@ -8,7 +8,6 @@ import { News } from 'styled-icons/boxicons-solid/News';
 
 export default function Links(props) {
 
-
     const links = [
         {
             icon: News,
@@ -32,7 +31,7 @@ export default function Links(props) {
             <h3>Links</h3>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                 {
-                    links.map(extraLink =>
+                    links.filter(link => link.link !== null).map(extraLink =>
                         <div key={extraLink.name}>
                             <a href={extraLink.link} rel="noopener noreferrer" target="_blank" style={{ display: 'flex', flexDirection: 'column', margin: '1em', color: 'inherit', opacity: '.4', textDecoration: 'none' }}>
                                 <extraLink.icon style={{ height: '50px' }} />

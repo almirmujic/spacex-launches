@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 //components
+import Media from './Media';
 import Links from './Links';
 
 //styling
@@ -38,10 +39,12 @@ function Launch({ match }) {
 
     useEffect(() => {
         async function fetchLaunch() {
+            setLoading(true);
             const res = await fetch(`https://api.spacexdata.com/v3/launches/${match.params.id}`);
             const data = await res.json();
             const objData = formatData(data);
             setInfo(objData);
+            setLoading(false)
         }
 
         fetchLaunch();
@@ -58,42 +61,8 @@ function Launch({ match }) {
                 <span style={{ opacity: '.4' }}>{info.year}</span>
                 <h2 style={{ margin: '1em' }}>{info.location}</h2>
                 <p style={{ lineHeight: '1.5em', letterSpacing: '.6px' }}>{info.details}</p>
-                <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2em', width: '100%' }}>
-                    {
-                        info.youtube === null ? '' :
-                            <div style={{
-                                position: 'relative',
-                                overflow: 'hidden',
-                                paddingTop: '56.25%',
-                                margin: '1em',
-                            }}>
-                                <iframe
-                                    style={{
-                                        position: 'absolute',
-                                        top: 0,
-                                        left: 0,
-                                        width: '100%',
-                                        height: '100%',
-
-                                        border: 0
-                                    }}
-                                    id='iframe'
-                                    src={`https://www.youtube.com/embed/${info.youtube}`}
-                                    title={info.missionName}
-                                    frameBorder="0"
-                                    allow='autoplay; encrypted-media'
-                                    allowFullScreen
-                                />
-                            </div>
-                    }
-                    {
-                        info.imgs === undefined || info.imgs.length <= 0 ? '' :
-                            <div style={{ width: '100%' }}>
-                                <img src={info.imgs[0]} alt={info.name} style={{ width: '100%', padding: '1em' }} />
-                            </div>
-                    }
-                    <Links info={info} />
-                </div>
+                <Media info={info} />
+                <Links info={info} />
             </div>
         </div >
     )

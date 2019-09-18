@@ -3,22 +3,14 @@ import '../App.css'
 
 //styling
 import styled from 'styled-components'
+import { Wikipedia } from 'styled-icons/boxicons-logos/Wikipedia';
+import { Reddit } from 'styled-icons/boxicons-logos/Reddit';
+import { News } from 'styled-icons/boxicons-solid/News';
+
 
 const Patch = styled.img`
     width: 200px;
     margin: 1em; 
-`
-
-const ImgBullet = styled.li`
-    width: 10px;
-    height: 10px;
-    margin: 5px;
-    border-radius: 50%;
-    background-color: #333;
-    opacity: .4;
-    &:hover{
-        opacity: 1;
-    }
 `
 
 function Launch({ match }) {
@@ -37,12 +29,14 @@ function Launch({ match }) {
             smallPatch: data.links.mission_patch_small,
             patch: data.links.mission_patch,
             reddit: data.links.reddit_launch,
+            article: data.links.article_link,
             wiki: data.links.wikipedia,
             missionName: data.mission_name,
             flightNum: data.flight_number,
             year: data.launch_year
         }
     }
+
     useEffect(() => {
         async function fetchLaunch() {
             const res = await fetch(`https://api.spacexdata.com/v3/launches/${match.params.id}`);
@@ -54,13 +48,28 @@ function Launch({ match }) {
         fetchLaunch();
     }, [match.params.id])
 
-    const setImg = (e) => {
-        setCurrImg(e.target.value);
-    }
+
+    const links = [
+        {
+            icon: News,
+            link: info.article,
+            name: 'Article'
+        },
+        {
+            icon: Wikipedia,
+            link: info.wiki,
+            name: 'Wikipedia'
+        },
+        {
+            icon: Reddit,
+            link: info.reddit,
+            name: 'Reddit'
+        }
+    ]
 
 
     return (
-        <div className="App">
+        <div className="App" >
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
                 <Patch src={info.patch} style={{ maxWidth: '200px', margin: '1em' }} />
                 <h1>{info.missionName}</h1>
@@ -74,7 +83,8 @@ function Launch({ match }) {
                             <div style={{
                                 position: 'relative',
                                 overflow: 'hidden',
-                                paddingTop: '56.25%'
+                                paddingTop: '56.25%',
+                                margin: '1em',
                             }}>
                                 <iframe
                                     style={{
@@ -83,6 +93,7 @@ function Launch({ match }) {
                                         left: 0,
                                         width: '100%',
                                         height: '100%',
+
                                         border: 0
                                     }}
                                     id='iframe'
@@ -97,18 +108,22 @@ function Launch({ match }) {
                     {
                         info.imgs === undefined || info.imgs.length <= 0 ? '' :
                             <div style={{ width: '100%' }}>
-                                <img src={info.imgs[currImg]} alt={info.name} style={{ width: '100%' }} />
-                                <ul style={{ display: 'flex', justifyContent: 'center', margin: '1em', listStyleType: 'none' }}>
-                                    {
-                                        info.imgs.map((img, id) => <ImgBullet onClick={setImg} value={id} ></ImgBullet>)
-                                    }
-                                </ul>
+                                <img src={info.imgs[currImg]} alt={info.name} style={{ width: '100%', padding: '1em' }} />
                             </div>
                     }
                     <div>
                         <h3>Extra links</h3>
-                        <div>
-
+                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                            {
+                                links.map(extraLink =>
+                                    <div key={extraLink.name}>
+                                        <a href={extraLink.link} rel="noopener noreferrer" target="_blank" style={{ display: 'flex', flexDirection: 'column', margin: '1em', color: 'inherit', opacity: '.4', textDecoration: 'none' }}>
+                                            <extraLink.icon style={{ height: '50px' }} />
+                                            <span>{extraLink.name}</span>
+                                        </a>
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
                 </div>

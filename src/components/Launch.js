@@ -61,9 +61,9 @@ function Launch({ match }) {
                 <span style={{ opacity: '.4' }}>{info.year}</span>
                 <h2 style={{ margin: '1em' }}>{info.location}</h2>
                 <p style={{ lineHeight: '1.5em', letterSpacing: '.6px' }}>{info.details}</p>
-                <Media info={info} />
-                <Links info={info} />
             </div>
+            <Media info={info} />
+            <Links info={info} />
         </div >
     )
 }

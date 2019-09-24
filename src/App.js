@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 //context
 import { DataContext } from './context/DataContext';
+import { ThemeContext } from './context/ThemeContext';
 
 //components
 import Thumbnail from './components/Thumbnail';
@@ -24,6 +25,13 @@ const Input = styled.input`
     padding: .7em 1.3em; 
     border-radius: 24px;
     border: 1px solid #dfe1e5;
+    &:hover{
+      box-shadow:0 1px 6px 0 rgba(32,33,36,0.28);      
+    }
+    &:focus{
+      box-shadow:0 1px 6px 0 rgba(32,33,36,0.28);
+      outline: none;
+    }
 `
 
 const ArrowContainer = styled.div`
@@ -55,6 +63,7 @@ const StyledRightArrow = styled(RightArrow) `
 
 function App() {
   const [launches, loading, offsetNum, setOffsetNum, pagination, filter, setFilter] = useContext(DataContext);
+  const toggleTheme = useContext(ThemeContext);
 
   const handleChange = e => {
     setFilter(e.target.value);
@@ -68,7 +77,7 @@ function App() {
     setOffsetNum(offsetNum - 24);
   }
 
-  const cleanLaunches = launches.filter(launch => launch.missionName.toLowerCase().includes(filter));
+  const cleanLaunches = launches.filter(launch => launch.missionName.toLowerCase().includes(filter.toLowerCase()));
 
   const mapLaunches = cleanLaunches.map(launch =>
     <Link to={`/${launch.flightNum}`} key={launch.flightNum} className="thumbnail-link">
@@ -85,8 +94,9 @@ function App() {
 
   return (
     <div className="App">
+      <button onClick={toggleTheme}>Click me</button>
       <h1 className="header h1">Welcome to SpaceX launches</h1>
-      <Input type='text' placeholder='Search mission...' onChange={handleChange} />
+      <Input type='text' placeholder='Search mission...' value={filter} onChange={handleChange} />
       {
         loading ? <h1 style={{ textAlign: 'center' }}>Loading...</h1> :
           <>

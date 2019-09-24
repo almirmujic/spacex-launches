@@ -36,7 +36,7 @@ export default function Links(props) {
     ]
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1em' }}>
             {
                 links.filter(link => link.link !== null).map(extraLink =>
                     <div key={extraLink.name}>

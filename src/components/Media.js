@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Media(props) {
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2em', width: '100%' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', margin: '2em 0', width: '100%' }}>
             {
                 props.info.youtube === null ? '' :
                     <div style={{

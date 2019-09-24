@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 
 import { Link } from 'react-router-dom';
+
+//context
+import { DataContext } from './context/DataContext';
 
 //components
 import Thumbnail from './components/Thumbnail';
@@ -51,74 +54,32 @@ const StyledRightArrow = styled(RightArrow) `
 `
 
 function App() {
-  const initialOffset = JSON.parse(window.localStorage.getItem('offset') || '0');
+  const [launches, loading, offsetNum, setOffsetNum, pagination, filter, setFilter] = useContext(DataContext);
 
-  const [launches, setLaunches] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [offsetNum, setOffsetNum] = useState(initialOffset);
-  const [filter, setFilter] = useState('');
-  const [pagination, showPagination] = useState(true);
-
-
-  const pullData = (data) => {
-    const goodData = data.map(function (launch) {
-      return {
-        missionName: launch.mission_name,
-        smallPatch: launch.links.mission_patch_small,
-        flightNum: launch.flight_number,
-        year: launch.launch_year
-      }
-    });
-    return goodData;
-  }
-
-  const goBack = () => {
-    setOffsetNum(offsetNum - 24);
+  const handleChange = e => {
+    setFilter(e.target.value);
   }
 
   const goNext = () => {
     setOffsetNum(offsetNum + 24);
   }
 
-  useEffect(() => {
-    async function fetchLaunches() {
-      setLoading(true);
-      let api = '';
-      if (filter === '') {
-        api = `https://api.spacexdata.com/v3/launches/?limit=24${offsetNum > 0 ? `&offset=${offsetNum}` : ''}`
-        window.localStorage.setItem('offset', JSON.stringify(offsetNum));
-        showPagination(true);
-      } else {
-        showPagination(false);
-        api = `https://api.spacexdata.com/v3/launches/`
-      }
-      const res = await fetch(api);
-      const data = await res.json();
-      const newData = pullData(data);
-      setLaunches(newData);
-      setLoading(false);
-    }
-
-    fetchLaunches();
-  }, [offsetNum, filter])
-
-
-  const handleChange = e => {
-    setFilter(e.target.value);
+  const goBack = () => {
+    setOffsetNum(offsetNum - 24);
   }
 
-  const filterLaunches = launches.filter(launch => launch.missionName.toLowerCase().includes(filter.toLowerCase()));
+  const cleanLaunches = launches.filter(launch => launch.missionName.toLowerCase().includes(filter));
 
-  const mapLaunches = filterLaunches.map(launch =>
-      <Link to={`/${launch.flightNum}`} key={launch.flightNum} className="thumbnail-link">
-          <Thumbnail missionName={launch.missionName} smallPatch={launch.smallPatch} year={launch.year} />
-      </Link>
+  const mapLaunches = cleanLaunches.map(launch =>
+    <Link to={`/${launch.flightNum}`} key={launch.flightNum} className="thumbnail-link">
+      <Thumbnail missionName={launch.missionName} smallPatch={launch.smallPatch} year={launch.year} />
+    </Link>
   );
 
-  const arrows = 
+  const arrows =
     <ArrowContainer>
-      { offsetNum < 24 ? '' : <Arrow onClick={goBack}><StyledLeftArrow /></Arrow> }
-      { launches.length < 24 ? '' : <Arrow onClick={goNext}><StyledRightArrow /></Arrow> }
+      {offsetNum < 24 ? '' : <Arrow onClick={goBack}><StyledLeftArrow /></Arrow>}
+      {launches.length < 24 ? '' : <Arrow onClick={goNext}><StyledRightArrow /></Arrow>}
     </ArrowContainer>;
 
 
@@ -130,9 +91,9 @@ function App() {
         loading ? <h1 style={{ textAlign: 'center' }}>Loading...</h1> :
           <>
             <div className='launch-grid'>
-              { mapLaunches }
+              {mapLaunches}
             </div>
-              { pagination ? arrows : '' }
+            {pagination ? arrows : ''}
           </>
       }
     </div>

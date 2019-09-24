@@ -28,12 +28,6 @@ export default function Media(props) {
                         />
                     </div>
             }
-            {
-                props.info.imgs === undefined || props.info.imgs.length <= 0 ? '' :
-                    <div style={{ width: '100%' }}>
-                        <img src={props.info.imgs[0]} alt={props.info.name} style={{ width: '100%', padding: '1em' }} />
-                    </div>
-            }
         </div>
     )
 }

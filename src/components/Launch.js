@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 
 //context
-import { DataContext } from '../context/DataContext';
+import { ThemeContext } from '../context/ThemeContext';
 
 //components
 import Media from './Media';
@@ -20,9 +20,9 @@ const Patch = styled.img`
 
 function Launch({ match }) {
 
-    // const [setFilter] = useContext(DataContext);
     const [info, setInfo] = useState('');
     const [loading, setLoading] = useState(false);
+    const toggleTheme = useContext(ThemeContext);
 
     useEffect(() => {
         const formatData = (data) => {
@@ -56,6 +56,7 @@ function Launch({ match }) {
 
     return (
         <div className="App" >
+            <button onClick={toggleTheme}>Toggle</button>
             {
                 loading ? <h1 style={{ textAlign: 'center', padding: '3em' }}>Loading...</h1> :
                     <>

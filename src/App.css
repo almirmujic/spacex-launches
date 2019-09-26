@@ -2,8 +2,7 @@
   margin: 0 auto;
   width: 80%;
   max-width: 980px;
-  /* border-left: 1px solid #333;
-  border-right: 1px solid #333; */
+  position: relative;
 }
 h1, h2, h3, h4, h5{
   font-family:  "Questrial", sans-serif;

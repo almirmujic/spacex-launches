@@ -11,7 +11,6 @@ import Links from './Links';
 import '../App.css'
 import styled from 'styled-components'
 
-
 const Patch = styled.img`
     width: 200px;
     margin: 1em; 
@@ -22,7 +21,7 @@ function Launch({ match }) {
 
     const [info, setInfo] = useState('');
     const [loading, setLoading] = useState(false);
-    const toggleTheme = useContext(ThemeContext);
+    const ThemeSwitch = useContext(ThemeContext);
 
     useEffect(() => {
         const formatData = (data) => {
@@ -56,7 +55,7 @@ function Launch({ match }) {
 
     return (
         <div className="App" >
-            <button onClick={toggleTheme}>Toggle</button>
+            {ThemeSwitch}
             {
                 loading ? <h1 style={{ textAlign: 'center', padding: '3em' }}>Loading...</h1> :
                     <>

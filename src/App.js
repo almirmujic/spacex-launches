@@ -63,7 +63,7 @@ const StyledRightArrow = styled(RightArrow) `
 
 function App() {
   const [launches, loading, offsetNum, setOffsetNum, pagination, filter, setFilter] = useContext(DataContext);
-  const toggleTheme = useContext(ThemeContext);
+  const ThemeSwitch = useContext(ThemeContext);
 
   const handleChange = e => {
     setFilter(e.target.value);
@@ -94,7 +94,7 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={toggleTheme}>Click me</button>
+      {ThemeSwitch}
       <h1 className="header h1">Welcome to SpaceX launches</h1>
       <Input type='text' placeholder='Search mission...' value={filter} onChange={handleChange} />
       {

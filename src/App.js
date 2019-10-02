@@ -37,7 +37,7 @@ const Input = styled.input`
 const ArrowContainer = styled.div`
   display: flex; 
   justify-content: center; 
-  padding: 2em; 
+  padding: 3em 2em 1em 2em; 
 `
 
 const Arrow = styled.div`

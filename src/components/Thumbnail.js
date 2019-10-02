@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function Thumbnail(props) {
     return (
@@ -13,4 +14,9 @@ export default function Thumbnail(props) {
             </div>
         </div>
     )
+}
+
+Thumbnail.propTypes = {
+    smallPatch: PropTypes.string,
+    missionName: PropTypes.string
 }

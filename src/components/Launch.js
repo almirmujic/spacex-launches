@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext } from 'react';
 
 //context
 import { ThemeContext } from '../context/ThemeContext';
@@ -8,25 +8,24 @@ import Media from './Media';
 import Links from './Links';
 
 //styling
-import '../App.css'
-import styled from 'styled-components'
+import '../App.css';
+import styled from 'styled-components';
 
 const Patch = styled.img`
     width: 200px;
     margin: 1em; 
 `
 
-
 function Launch({ match }) {
 
-    const [info, setInfo] = useState('');
+    const [info, setInfo] = useState({});
     const [loading, setLoading] = useState(false);
     const ThemeSwitch = useContext(ThemeContext);
 
     useEffect(() => {
         const formatData = (data) => {
             return {
-                details: data.details,
+                details: data.details || 'Details not currently available.',
                 name: data.rocket.rocket_name,
                 location: data.launch_site.site_name,
                 video: data.links.video_link,
@@ -52,6 +51,7 @@ function Launch({ match }) {
         }
         fetchLaunch();
     }, [match.params.id])
+
 
     return (
         <div className="App" >

@@ -12,7 +12,7 @@ const SwitchContainer = styled.div`
      width: 45px;
      height: 45px; 
      right: 20px; 
-     bottom: 10px; 
+     bottom: 20px; 
      z-index: 2; 
      @media (min-width: 980px) {
         position: absolute;

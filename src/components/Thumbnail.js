@@ -18,5 +18,6 @@ export default function Thumbnail(props) {
 
 Thumbnail.propTypes = {
     smallPatch: PropTypes.string,
-    missionName: PropTypes.string
+    missionName: PropTypes.string.isRequired,
+    year: PropTypes.string.isRequired
 }

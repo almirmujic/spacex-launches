@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 //styling
-import styled from 'styled-components'
+import styled from 'styled-components';
 import { Wikipedia } from 'styled-icons/boxicons-logos/Wikipedia';
 import { Reddit } from 'styled-icons/boxicons-logos/Reddit';
 import { News } from 'styled-icons/boxicons-solid/News';
@@ -16,6 +17,7 @@ const AnchorLink = styled.a`
 `
 
 export default function Links(props) {
+
 
     const links = [
         {
@@ -37,6 +39,7 @@ export default function Links(props) {
 
     return (
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1em' }}>
+            {console.log(props.info)}
             {
                 links.filter(link => link.link !== null).map(extraLink =>
                     <div key={extraLink.name}>
@@ -49,4 +52,8 @@ export default function Links(props) {
             }
         </div>
     )
+}
+
+Links.propTypes = {
+    info: PropTypes.object.isRequired
 }

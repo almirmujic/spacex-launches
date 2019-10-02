@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function Media(props) {
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', margin: '2em 0', paddingBottom: '2em', width: '100%' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', margin: '2em 0', paddingBottom: '1em', width: '100%' }}>
             {
                 props.info.youtube === null ? '' :
                     <div style={{
@@ -30,4 +31,8 @@ export default function Media(props) {
             }
         </div>
     )
+}
+
+Media.propTypes = {
+    info: PropTypes.object.isRequired
 }

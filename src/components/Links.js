@@ -18,7 +18,6 @@ const AnchorLink = styled.a`
 
 export default function Links(props) {
 
-
     const links = [
         {
             icon: News,
@@ -37,9 +36,8 @@ export default function Links(props) {
         }
     ]
 
-    return (
+    return props.info ? (
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1em' }}>
-            {console.log(props.info)}
             {
                 links.filter(link => link.link !== null).map(extraLink =>
                     <div key={extraLink.name}>
@@ -51,7 +49,9 @@ export default function Links(props) {
                 )
             }
         </div>
-    )
+    ) : (
+            <div>Loading...</div>
+        )
 }
 
 Links.propTypes = {

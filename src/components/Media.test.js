@@ -1,11 +1,11 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import Thumbnail from './Thumbnail';
+import Media from './Media';
 
-describe('Thumbnail tests', () => {
+describe('Media tests', () => {
 
     it('should exist', () => {
-        const wrapper = shallow(<Thumbnail />);
+        const wrapper = shallow(<Media />);
         expect(wrapper.exists()).toBe(true);
     })
 

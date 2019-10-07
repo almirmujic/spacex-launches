@@ -42,12 +42,16 @@ function Launch({ match }) {
             }
         }
         async function fetchLaunch() {
-            setLoading(true);
-            const res = await fetch(`https://api.spacexdata.com/v3/launches/${match.params.id}`);
-            const data = await res.json();
-            const objData = formatData(data);
-            setInfo(objData);
-            setLoading(false)
+            try {
+                setLoading(true);
+                const res = await fetch(`https://api.spacexdata.com/v3/launches/${match.params.id}`);
+                const data = await res.json();
+                const objData = formatData(data);
+                setInfo(objData);
+                setLoading(false);
+            } catch (error) {
+                console.log(error)
+            }
         }
         fetchLaunch();
     }, [match.params.id])

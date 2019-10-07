@@ -16,6 +16,12 @@ const AnchorLink = styled.a`
      text-decoration: none;
 `
 
+const LinksContainer = styled.div`
+     display: flex;
+     justify-content: center;
+     margin-top: 1em;
+`
+
 export default function Links(props) {
 
     const links = [
@@ -37,7 +43,7 @@ export default function Links(props) {
     ]
 
     return props.info ? (
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1em' }}>
+        <LinksContainer>
             {
                 links.filter(link => link.link !== null).map(extraLink =>
                     <div key={extraLink.name}>
@@ -48,7 +54,7 @@ export default function Links(props) {
                     </div>
                 )
             }
-        </div>
+        </LinksContainer>
     ) : (
             <div>Loading...</div>
         )

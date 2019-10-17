@@ -21,11 +21,3 @@ h1, h2, h3, h4, h5{
   transition: .2s;
   transform: scale(1.1);
 }
-.footer{
-  opacity: .6;
-  text-align: center;
-  padding: 2em 1em 2em 1em;
-}
-.footer a{
-  color: inherit;
-}

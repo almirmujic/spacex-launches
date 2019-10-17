@@ -61,6 +61,21 @@ const StyledRightArrow = styled(RightArrow) `
   }
 `
 
+const LaunchGrid = styled.div`
+  margin: 0 auto;
+  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 120px);
+  grid-gap: 3em;
+  & a div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; 
+  }
+`
+
 function App() {
   const [launches, loading, offsetNum, setOffsetNum, pagination, filter, setFilter] = useContext(DataContext);
   const ThemeSwitch = useContext(ThemeContext);
@@ -100,9 +115,9 @@ function App() {
       {
         loading ? <h1 style={{ textAlign: 'center' }}>Loading...</h1> :
           <>
-            <div className='launch-grid'>
+            <LaunchGrid>
               {mapLaunches}
-            </div>
+            </LaunchGrid>
             {pagination ? arrows : ''}
           </>
       }

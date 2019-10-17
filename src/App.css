@@ -21,20 +21,6 @@ h1, h2, h3, h4, h5{
   transition: .2s;
   transform: scale(1.1);
 }
-.launch-grid {
-  margin: 0 auto;
-  justify-content: center;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 120px);
-  grid-gap: 3em;
-}
-.launch-grid a div{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center; 
-}
 .app-container{
   height: 100%;
   width: 100%;

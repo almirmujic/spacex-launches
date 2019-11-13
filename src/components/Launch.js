@@ -47,7 +47,6 @@ function Launch({ match }) {
                 const res = await fetch(`https://api.spacexdata.com/v3/launches/${match.params.id}`);
                 const data = await res.json();
                 const objData = formatData(data);
-                console.log(objData);
                 setInfo(objData);
                 setLoading(false);
             } catch (error) {

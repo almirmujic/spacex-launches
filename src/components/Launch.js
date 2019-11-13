@@ -51,10 +51,11 @@ function Launch({ match }) {
                 setLoading(false);
             } catch (error) {
                 console.log(error)
+                setLoading(false);
             }
         }
         fetchLaunch();
-    }, [match.params.id])
+    }, [match.params.id, info.missionName])
 
 
     return (

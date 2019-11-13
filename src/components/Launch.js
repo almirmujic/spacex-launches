@@ -22,6 +22,11 @@ function Launch({ match }) {
     const [loading, setLoading] = useState(false);
     const ThemeSwitch = useContext(ThemeContext);
 
+    const newFavicon = (src) => {
+        let icon = document.getElementById('favicon');
+        icon.href = `${src}`;
+    }
+
     useEffect(() => {
         const formatData = (data) => {
             return {
@@ -56,10 +61,15 @@ function Launch({ match }) {
             }
         }
         fetchLaunch();
-    }, [match.params.id, info.missionName])
+        newFavicon(info.smallPatch);
+    }, [match.params.id, info.missionName, info.smallPatch])
 
     useEffect(() => {
-        return () => document.title = 'SpaceX | Launches';
+        return () => {
+            document.title = 'SpaceX | Launches';
+            let icon = document.getElementById('favicon');
+            icon.href = 'https://cynet-web.com/wp-content/uploads/2015/05/SEO-SPACESHIP-ICON-CYNET-white-320px.png';
+        }
     }, [])
 
 

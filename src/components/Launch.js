@@ -58,6 +58,10 @@ function Launch({ match }) {
         fetchLaunch();
     }, [match.params.id, info.missionName])
 
+    useEffect(() => {
+        return () => document.title = 'SpaceX | Launches';
+    }, [])
+
 
     return (
         <div className="App" >

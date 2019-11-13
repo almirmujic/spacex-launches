@@ -49,6 +49,7 @@ function Launch({ match }) {
                 const objData = formatData(data);
                 setInfo(objData);
                 setLoading(false);
+                info.missionName ? document.title = `SpaceX | ${info.missionName}` : document.title = `SpaceX | Launches`;
             } catch (error) {
                 console.log(error)
                 setLoading(false);

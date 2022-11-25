@@ -18,6 +18,6 @@ const FooterElement = styled.h4`
 
 export default function Footer() {
     return (
-        <FooterElement>Created by <a href='https://almir.dev'>Almir</a></FooterElement>
+        <FooterElement>Created by <a href='https://almirmujic.com'>Almir</a></FooterElement>
     )
 }
